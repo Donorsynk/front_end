@@ -1,5 +1,6 @@
 "use client"
 import { useState } from "react";
+import main from '../hooks/upload.mjs'
 
 
 export default function DonorAppointmentForm() {
@@ -23,9 +24,20 @@ export default function DonorAppointmentForm() {
     setBloodGroup(selectedValue);
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit =  (e) => {
     e.preventDefault();
-    // Add your form submission logic here
+     main(location,
+      time,
+      date,
+      bloodGroup,
+      name,
+      GID,
+      age,
+      weight).then((data)=>{
+
+        console.log('uri',data.ipnft);
+      })
+
   };
 
   return (
@@ -37,7 +49,7 @@ export default function DonorAppointmentForm() {
         <p className="text-xs text-gray-400">Create an appointment to make a blood donation with an hospital around you.</p>
       </div>
       <hr></hr>
-      <form className="mt-5">
+      <form onSubmit={handleSubmit} className="mt-5">
         <div className="flex-grow">
           <label htmlFor="location">Location:</label><br></br>
           <select value={location} onChange={handleLocation} class="px-2 py-1 rounded-lg border-solid border-2 border-light-gray-500 w-full h-10">
@@ -145,9 +157,12 @@ export default function DonorAppointmentForm() {
           /><br /><br />
         </div>
 
-
-        <input type="submit" value="Submit"  />
+<button  type="submit" >  
+  submit
+</button>
+        {/* <input type="submit" value="Submit" /> */}
       </form>
+
     </div>
     </div>
   );
