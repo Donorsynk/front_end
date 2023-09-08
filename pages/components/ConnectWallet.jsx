@@ -97,9 +97,7 @@ export default function ConnectWallet() {
                         </button>
                         <button onClick={openAccountModal} type="button" className="">
                           {account.displayName}
-                          {/* {account.displayBalance
-                            ? ` (${account.displayBalance})`
-                            : ''} */}
+                
                         </button>
                       </div>
                     );
