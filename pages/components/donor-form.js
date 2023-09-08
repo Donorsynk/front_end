@@ -13,7 +13,9 @@ export default function DonorAppointmentForm() {
   const [email, setEmail]=useState('')
   const[GID, setGID]= useState('')
   const [age, setAge]= useState(0);
+  const [image, setImage] = useState('')
   const [weight, setWeight] = useState(0)
+  const [uri, setUri] = useState('')
 
   const handleLocation=(e)=>{
     const selectedValue = e.target.value;
@@ -24,9 +26,19 @@ export default function DonorAppointmentForm() {
     setBloodGroup(selectedValue);
   }
 
-  const handleSubmit =  (e) => {
+  const handleSubmit =  async(e) => {
     e.preventDefault();
-     main(location,
+    const description = 'hello'
+  
+    const file='https://www.verywellhealth.com/static/5.59.0/images/illoHand_heart.svg'
+    setImage(file);
+
+    const response = await fetch(image);
+    const blob = await response.blob();
+    await main(
+      blob,
+      description,
+      location,
       time,
       date,
       bloodGroup,
@@ -34,7 +46,7 @@ export default function DonorAppointmentForm() {
       GID,
       age,
       weight).then((data)=>{
-
+        setUri(data.ipnft);
         console.log('uri',data.ipnft);
       })
 
