@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import ConnectWallet from '../components/ConnectWallet'
 const HospitalNavBar = () => {
   return (
     <div className="mx-10 flex justify-between items-center mt-10 ">
@@ -15,9 +16,7 @@ const HospitalNavBar = () => {
         <h1 className="px-2 justify-center font-semibold self-center text-red-400">
           1000 DSK
         </h1>
-        <button className="connect-wallet text-white px-4 py-2 rounded-md">
-          Connected
-        </button>
+        <ConnectWallet />
       </div>
     </div>
   )
