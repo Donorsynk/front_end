@@ -10,7 +10,7 @@ export default function Admin() {
     const { data, isError, isLoading } = useContractRead({
         address: donorSynkAddress,
         abi: donorABI,
-        functionName: 'registeredHospitalStatus',
+        functionName: 'fetchStatus',
         args:[address]
       })
   return (
