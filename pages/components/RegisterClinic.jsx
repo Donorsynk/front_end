@@ -36,7 +36,7 @@ export default function RegisterClinic() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoadingState(true)
-    console.log("img", image);
+    // console.log("img", image);
     await main(
       name,
       description,
