@@ -25,6 +25,7 @@ export default function DonorAppointmentForm() {
   const [weight, setWeight] = useState(0)
   const [uri, setUri] = useState('')
   const [loadingState, setLoadingState] = useState(false)
+  
 
   const handleLocation = (e) => {
     const selectedValue = e.target.value;
@@ -131,6 +132,7 @@ if(writeIsSuccess){
                 name="date"
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
+               
                 required
               />
             </div>
@@ -145,6 +147,7 @@ if(writeIsSuccess){
                 name="time"
                 value={time}
                 onChange={(e) => setTime(e.target.value)}
+               
                 required
               />
               <br />

@@ -123,7 +123,6 @@ const HospitalForm = () => {
                     </div>
 
 
-
                     
                     {/* <div id="img-sec" className="flex justify justify-between w-2/4 items-center text-white"> */}
 
