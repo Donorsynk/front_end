@@ -1,1 +1,1 @@
-export const donorSynkAddress='0x83671fa24Ca4B3E548581D6D29F077a3586B6254';
+export const donorSynkAddress='0x9055D55964C2081e5f65FE832B56155a1C1eF127';

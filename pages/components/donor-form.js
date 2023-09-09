@@ -25,7 +25,6 @@ export default function DonorAppointmentForm() {
   const [weight, setWeight] = useState(0)
   const [uri, setUri] = useState('')
   const [loadingState, setLoadingState] = useState(false)
-  const [loadingState, setLoadingState] = useState(false)
 
   const handleLocation = (e) => {
     const selectedValue = e.target.value;
@@ -82,24 +81,25 @@ export default function DonorAppointmentForm() {
     },
 
   })
-  useEffect(() => {
-    if (uri != "") {
-      write?.()
-    }
-    if (writeIsSuccess) {
-      setLocation('');
-      setTime('');
-      setDate('');
-      setBloodGroup('');
-      setName('');
-      setEmail('');
-      setGID('');
-      setAge(0);
-      setImage('');
-      setWeight(0);
-      setUri('');
-    }
-  }, [uri, writeIsSuccess])
+  
+useEffect(()=>{
+if(uri!=""){
+  write?.()
+}
+if(writeIsSuccess){
+  setLocation('');
+  setTime('');
+  setDate('');
+  setBloodGroup('');
+  setName('');
+  setEmail('');
+  setGID('');
+  setAge(0);
+  setImage('');
+  setWeight(0);
+  setUri('');
+}
+},[uri, writeIsSuccess])
 
   return (
     <div className="flex justify-center w-11/12 p-4 bg-white mx-30 align-center">
@@ -131,7 +131,6 @@ export default function DonorAppointmentForm() {
                 name="date"
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
-                onChange={(e) => setDate(e.target.value)}
                 required
               />
             </div>
@@ -145,7 +144,6 @@ export default function DonorAppointmentForm() {
                 id="time"
                 name="time"
                 value={time}
-                onChange={(e) => setTime(e.target.value)}
                 onChange={(e) => setTime(e.target.value)}
                 required
               />
