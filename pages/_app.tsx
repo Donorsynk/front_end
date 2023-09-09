@@ -4,6 +4,7 @@ import { getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import type { AppProps } from 'next/app';
 import { configureChains, createConfig, WagmiConfig } from 'wagmi';
 import {
+  sepolia,
   arbitrum,
   goerli,
   mainnet,
@@ -13,9 +14,12 @@ import {
   zora,
 } from 'wagmi/chains';
 import { publicProvider } from 'wagmi/providers/public';
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   [
+    sepolia,
     mainnet,
     polygon,
     optimism,
@@ -28,8 +32,8 @@ const { chains, publicClient, webSocketPublicClient } = configureChains(
 );
 
 const { connectors } = getDefaultWallets({
-  appName: 'RainbowKit App',
-  projectId: 'YOUR_PROJECT_ID',
+  appName: 'DonorSynk',
+  projectId: '1a7e15dc71f5d3b03fb155264c5d3a74',
   chains,
 });
 
@@ -45,6 +49,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <WagmiConfig config={wagmiConfig}>
       <RainbowKitProvider chains={chains}>
         <Component {...pageProps} />
+        <ToastContainer/>
       </RainbowKitProvider>
     </WagmiConfig>
   );

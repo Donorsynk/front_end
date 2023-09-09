@@ -1,9 +1,17 @@
 "use client"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import main from '../hooks/upload.mjs'
+import { useRouter } from "next/router";
+import { useContractWrite, useWaitForTransaction } from "wagmi";
+import donorABI from '../../constant/ABI/Donosynk.json'
+import { donorSynkAddress } from '../../constant/contract';
+import { toast } from "react-toastify";
 
 
 export default function DonorAppointmentForm() {
+  const router = useRouter();
+  const { id } = router.query;
+  
 
   const [location, setLocation] = useState("");
   const [time, setTime] = useState("");
@@ -16,6 +24,7 @@ export default function DonorAppointmentForm() {
   const [image, setImage] = useState('')
   const [weight, setWeight] = useState(0)
   const [uri, setUri] = useState('')
+  const[loadingState, setLoadingState] = useState(false)
 
   const handleLocation=(e)=>{
     const selectedValue = e.target.value;
@@ -28,6 +37,7 @@ export default function DonorAppointmentForm() {
 
   const handleSubmit =  async(e) => {
     e.preventDefault();
+    setLoadingState(true)
     const description = 'hello'
   
     const file='https://www.verywellhealth.com/static/5.59.0/images/illoHand_heart.svg'
@@ -49,8 +59,45 @@ export default function DonorAppointmentForm() {
         setUri(data.ipnft);
         console.log('uri',data.ipnft);
       })
+      setLoadingState(false)
 
   };
+
+  const { data:writeData, isLoading:writeIsLoading, isSuccess:writeIsSuccess, write } = useContractWrite({
+    address: donorSynkAddress,
+    abi: donorABI,
+    functionName: 'bookDonorAppointment',
+    args: [id,GID, uri],
+  })
+
+  const {data, isError, isLoading} = useWaitForTransaction({
+    hash: writeData?.hash,
+    onSuccess(data) {
+      // console.log('Success', data)
+      toast.success("Appointment Booked");
+      router.push("/hospitals")
+
+    },
+
+  })
+useEffect(()=>{
+if(uri!=""){
+  write?.()
+}
+if(writeIsSuccess){
+  setLocation('');
+  setTime('');
+  setDate('');
+  setBloodGroup('');
+  setName('');
+  setEmail('');
+  setGID('');
+  setAge(0);
+  setImage('');
+  setWeight(0);
+  setUri('');
+}
+},[uri, writeIsSuccess])
 
   return (
     <div className="bg-white p-4 w-11/12 mx-30 flex justify-center align-center">
@@ -169,9 +216,22 @@ export default function DonorAppointmentForm() {
           /><br /><br />
         </div>
 
+{loadingState || writeIsLoading || isLoading ?
+<button>
+  
+<span class="relative flex h-3 w-3">
+  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+  <span class="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
+</span>
+submiting..
+   </button>
+
+:
 <button  type="submit" >  
-  submit
+ submit
+ 
 </button>
+}
         {/* <input type="submit" value="Submit" /> */}
       </form>
 
