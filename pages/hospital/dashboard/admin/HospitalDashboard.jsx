@@ -34,9 +34,9 @@ const [myuri, setMyURI]=useState('')
     watch:true,
   })
 
+console.log(allURI[0]);
 
-
-  const{data, isError:fetchErrror, isLoading:fetchLoading}= useReadURI(myuri)
+  const{data, isError:fetchErrror, isLoading:fetchLoading}= useReadURI(allURI[0])
  console.log('datadd',data);
 
 useEffect(()=>{
