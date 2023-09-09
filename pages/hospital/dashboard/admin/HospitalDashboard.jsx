@@ -8,12 +8,18 @@ import {donorSynkAddress} from '../../../../constant/contract'
 import { useAccount, useContractRead } from 'wagmi'
 import useReadURI from '../../../hooks/useReadURI'
 
+<<<<<<< HEAD
 
 export default function HospitalDashboard() {
   const [isVerified, setIsVerified] = useState(true) // Rename the state variable
 const[allURI, setAllURI] = useState([])
   const {address} = useAccount()
 const [myuri, setMyURI]=useState('')
+=======
+export default function HospitalDashboard() {
+  const [isVerified, setIsVerified] = useState(true) // Rename the state variable
+const {address} = useAccount()
+>>>>>>> 7c4ad13 (dashboard set)
   const toggleTable = () => {
     setIsVerified(!isVerified) // Use setIsVerified to update the state
   }
