@@ -12,6 +12,7 @@ const NavBar = () => {
                     src="/images/main-logo.png"
                     width={161}
                     height={32}
+                    alt=''
                 />
             </Link>
             {/* <button className="connect-wallet text-white px-4 py-2 rounded-md">Connect Wallet</button> */}
