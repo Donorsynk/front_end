@@ -42,8 +42,9 @@ export default function DonorAppointmentForm() {
       'https://www.verywellhealth.com/static/5.59.0/images/illoHand_heart.svg'
     setImage(file)
 
-    const response = await fetch(image)
-    const blob = await response.blob()
+    const response = await fetch(image);
+    const blob = await response.blob();
+    
     await main(
       blob,
       description,

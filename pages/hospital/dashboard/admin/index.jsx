@@ -3,9 +3,14 @@ import DonorTableList from '../../../components/donor-table'
 import PendingDonorTableList from '../../../components/pending-donor-table'
 import Image from 'next/image'
 import React, { useState } from 'react'
+import donorABI from '../../../../constant/ABI/Donosynk.json'
+import {donorSynkAddress} from '../../../../constant/contract'
+import { useAccount, useContractRead } from 'wagmi'
+import useReadURI from '../../../hooks/useReadURI'
+
 export default function HospitalDashboard() {
   const [isVerified, setIsVerified] = useState(true) // Rename the state variable
-
+const {address} = useAccount()
   const toggleTable = () => {
     setIsVerified(!isVerified) // Use setIsVerified to update the state
   }
@@ -17,6 +22,18 @@ export default function HospitalDashboard() {
   const switchToPending = () => {
     setIsVerified(false) // Use setIsVerified to switch to pending
   }
+
+  const { data:uri, isError, isLoading } = useContractRead({
+    address: donorSynkAddress,
+    abi: donorABI,
+    functionName: 'showMyHospital',
+    args:[address]
+  })
+
+  console.log(uri);
+  const{data, isError:fetchErrror, isLoading:fetchLoading}= useReadURI(uri)
+ console.log(data);
+
   return (
     <main className=" min-h-screen flex-col items-center justify-between">
       <HospitalNavBar />

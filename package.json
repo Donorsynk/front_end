@@ -10,13 +10,18 @@
   },
   "dependencies": {
     "@rainbow-me/rainbowkit": "^1.0.11",
+    "axios": "^1.5.0",
+    "formik": "^2.4.4",
+    "axios": "^1.5.0",
     "next": "^13.4.19",
     "nft.storage": "^7.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-query": "^3.39.3",
     "react-toastify": "^9.1.3",
     "viem": "~1.10.7",
-    "wagmi": "~1.4.1"
+    "wagmi": "~1.4.1",
+    "yup": "^1.2.0"
   },
   "devDependencies": {
     "@types/node": "^18.16.12",
