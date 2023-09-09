@@ -45,6 +45,7 @@ export default function DonorAppointmentForm() {
 
     const response = await fetch(image);
     const blob = await response.blob();
+    
     await main(
       blob,
       description,
