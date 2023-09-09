@@ -7,7 +7,7 @@ import { donorSynkAddress } from "../../constant/contract";
 import donorABI from "../../constant/ABI/Donosynk.json";
 import CardLoading from "../components/CardLoading";
 
-export default function index() {
+export default function Hospitals() {
   const { data, isLoading, isError } = useContractRead({
     address: donorSynkAddress,
     abi: donorABI,

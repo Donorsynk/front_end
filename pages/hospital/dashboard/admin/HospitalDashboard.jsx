@@ -2,15 +2,18 @@ import HospitalNavBar from '../../../components/hospital-navbar'
 import DonorTableList from '../../../components/donor-table'
 import PendingDonorTableList from '../../../components/pending-donor-table'
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import donorABI from '../../../../constant/ABI/Donosynk.json'
 import {donorSynkAddress} from '../../../../constant/contract'
 import { useAccount, useContractRead } from 'wagmi'
 import useReadURI from '../../../hooks/useReadURI'
 
+
 export default function HospitalDashboard() {
   const [isVerified, setIsVerified] = useState(true) // Rename the state variable
-const {address} = useAccount()
+const[allURI, setAllURI] = useState([])
+  const {address} = useAccount()
+const [myuri, setMyURI]=useState('')
   const toggleTable = () => {
     setIsVerified(!isVerified) // Use setIsVerified to update the state
   }
@@ -31,14 +34,29 @@ const {address} = useAccount()
     watch:true,
   })
 
-  console.log('my_uri',uri[0]);
+console.log(allURI[0]);
 
-  const{data, isError:fetchErrror, isLoading:fetchLoading}= useReadURI(uri[0])
+  const{data, isError:fetchErrror, isLoading:fetchLoading}= useReadURI(allURI[0])
  console.log('datadd',data);
+
+useEffect(()=>{
+
+  
+
+  setAllURI(uri)
+if(allURI !='' ||undefined){
+  setMyURI(allURI[0])
+}
+}, [uri])
 
   return (
     <main className=" min-h-screen flex-col items-center justify-between">
       <HospitalNavBar data={data}/>
+      {/* {
+        fetchLoading? 
+        <CardLoad/>
+        : */}
+
       <div className="flex flex-row mx-10 my-10 space-x-4">
         <div className="flex-1 bg-white p-5 rounded-lg">
           <p>{data?.description}
@@ -66,6 +84,7 @@ const {address} = useAccount()
           />
         </div>
       </div>
+      {/* } */}
 
       {/* bottom Section */}
 
