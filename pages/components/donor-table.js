@@ -1,4 +1,17 @@
+import { useAccount, useContractRead } from 'wagmi'
+import donorABI from '../../constant/ABI/Donosynk.json'
+import {donorSynkAddress} from '../../constant/contract'
+import useReadURI from '../hooks/useReadURI'
+
 const DonorTableList = () => {
+
+  const { data:uri, isError, isLoading } = useContractRead({
+    address: donorSynkAddress,
+    abi: donorABI,
+    functionName: 'showAllDonors',
+    args:[_name]
+  })
+
   return (
     <div>
       <div className="overflow-x-auto">

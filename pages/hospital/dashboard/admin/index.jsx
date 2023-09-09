@@ -10,7 +10,8 @@ import useReadURI from '../../../hooks/useReadURI'
 
 export default function HospitalDashboard() {
   const [isVerified, setIsVerified] = useState(true) // Rename the state variable
-const {address} = useAccount()
+  const {address} = useAccount()
+
   const toggleTable = () => {
     setIsVerified(!isVerified) // Use setIsVerified to update the state
   }
@@ -32,7 +33,7 @@ const {address} = useAccount()
 
   console.log(uri);
   const{data, isError:fetchErrror, isLoading:fetchLoading}= useReadURI(uri)
- console.log(data);
+  console.log(data);
 
   return (
     <main className=" min-h-screen flex-col items-center justify-between">
