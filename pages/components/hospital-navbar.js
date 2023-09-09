@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import ConnectWallet from '../components/ConnectWallet'
-const HospitalNavBar = () => {
+const HospitalNavBar = ({data}) => {
+
   return (
     <div className="mx-10 flex justify-between items-center mt-10 ">
       <div className="flex">

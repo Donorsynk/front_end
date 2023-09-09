@@ -16,6 +16,7 @@ import {
 import { publicProvider } from 'wagmi/providers/public';
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   [
@@ -44,12 +45,18 @@ const wagmiConfig = createConfig({
   webSocketPublicClient,
 });
 
+const queryClient = new QueryClient()
+
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <WagmiConfig config={wagmiConfig}>
       <RainbowKitProvider chains={chains}>
+     
+        <QueryClientProvider client={queryClient}>
         <Component {...pageProps} />
+
         <ToastContainer/>
+        </QueryClientProvider>
       </RainbowKitProvider>
     </WagmiConfig>
   );
