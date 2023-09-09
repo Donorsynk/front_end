@@ -7,8 +7,8 @@ const HospitalNavBar = ({data}) => {
       <div className="flex">
         <Image src="/images/Hospital-logo.png" width={62} height={62} alt="" />
         <div className="flex flex-col mx-4">
-          <h1 className="font-bold text-xl">St Mary Vision Clinic</h1>
-          <p>Your Trusted Eye Care Partner</p>
+          <h1 className="font-bold text-xl">{data?.name}</h1>
+          <p>{data?.hospitalmot}</p>
         </div>
       </div>
 

@@ -4,6 +4,7 @@ import HospitalForm from '../../hospital-form/HospitalForm'
 import { useAccount, useContractRead } from 'wagmi'
 import donorABI from '../../../../constant/ABI/Donosynk.json'
 import {donorSynkAddress} from '../../../../constant/contract'
+import { watch } from 'fs'
 
 export default function Admin() {
     const {address} = useAccount()
@@ -11,12 +12,15 @@ export default function Admin() {
         address: donorSynkAddress,
         abi: donorABI,
         functionName: 'fetchStatus',
-        args:[address]
+        args:[address],
+        watch: true
       })
+
+      console.log(data);
   return (
     <div>
         {
-            data ==='true'?
+            data ===true?
             <HospitalDashboard/>
             :
         <HospitalForm/>

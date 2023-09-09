@@ -97,7 +97,8 @@ export default function RegisterClinic() {
         setPhone("");
         setEmail('');
         setWebsite("");
-      setUri('');
+        setURI('');
+        toast.success("Hospital Registered");
     }
   }, [uri, writeIsSuccess]);
 
