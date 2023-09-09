@@ -25,6 +25,7 @@ export default function DonorAppointmentForm() {
   const [weight, setWeight] = useState(0)
   const [uri, setUri] = useState('')
   const [loadingState, setLoadingState] = useState(false)
+  const [loadingState, setLoadingState] = useState(false)
 
   const handleLocation = (e) => {
     const selectedValue = e.target.value;
@@ -39,12 +40,13 @@ export default function DonorAppointmentForm() {
     e.preventDefault();
     setLoadingState(true)
     const description = 'hello'
-
-    const file = 'https://www.verywellhealth.com/static/5.59.0/images/illoHand_heart.svg'
+  
+    const file='https://www.verywellhealth.com/static/5.59.0/images/illoHand_heart.svg'
     setImage(file);
 
     const response = await fetch(image);
     const blob = await response.blob();
+    
     await main(
       blob,
       description,
@@ -118,8 +120,8 @@ export default function DonorAppointmentForm() {
             </select>
             <br /><br />
           </div>
-          <div className="flex justify-between">
-            <div className="w-full">
+            <div className="flex justify-between">
+              <div className="w-full">
               <label htmlFor="date">Date:</label>
               <br></br>
               <input
@@ -128,6 +130,7 @@ export default function DonorAppointmentForm() {
                 id="date"
                 name="date"
                 value={date}
+                onChange={(e) => setDate(e.target.value)}
                 onChange={(e) => setDate(e.target.value)}
                 required
               />
@@ -143,8 +146,11 @@ export default function DonorAppointmentForm() {
                 name="time"
                 value={time}
                 onChange={(e) => setTime(e.target.value)}
+                onChange={(e) => setTime(e.target.value)}
                 required
-              /><br /><br />
+              />
+              <br />
+              <br />
             </div>
           </div>
           <label htmlFor="bloodtype">Blood Type:</label>
@@ -240,5 +246,5 @@ export default function DonorAppointmentForm() {
 
       </div>
     </div>
-  );
+  )
 }
