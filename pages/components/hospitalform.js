@@ -6,6 +6,8 @@ import cancelImg from '../../public/images/form-images/cancel-img.svg';
 import cancel from '../../public/images/form-images/cancel.svg';
 import upload from '../../public/images/form-images/upload.svg';
 import Image from 'next/image';
+import main from '../hooks/register.mjs'
+import { useState } from 'react';
 
 
 
@@ -20,22 +22,46 @@ const validationSchema = Yup.object().shape({
     // Add more validation rules as needed for other fields
 });
 
+
   const initialValues = {
     logo: '',
+    hospitalDesc:'',
     hospitalName: '',
     hospitalLocation: '',
+    hospitalmot:'',
     stateCountry:'',
     businessRegistration: '',
     contactPhone: '',
     emailAddress: '',
-    website: '',
+    website: ''
   };
 
-  const handleSubmit = (values) => {
+
+
+  const handleSubmit = async (values) => {
     // Handle form submission here
     console.log(values);
-  };
+    const file = values.logo[0];
+    const blob = new Blob([file], { type: file.type });
+    const blobUrl = URL.createObjectURL(blob);
 
+    await main(blobUrl,
+        values.hospitalDesc,
+        values.hospitalName,
+        values.hospitalLocation,
+        values.hospitalmot,
+        values.stateCountry,
+        values.businessRegistration,
+        values.contactPhone,
+        values.emailAddress,
+        values.website).then((data)=>{
+            // setUri(data.ipnft);
+            console.log("dad", data.ipnft);
+        })
+
+  };
+//   const[uri, setUri] = useState('');
+// const [loadingState, setLoadingState]= useState(false);
 
 const HospitalForm = () => {
   return (
@@ -69,6 +95,8 @@ const HospitalForm = () => {
                     <ErrorMessage name="logo" component="div" className='text-slate-400 text-sm' />
                 </div>
 
+
+
                 
                 {/* <div id="img-sec" className="flex justify justify-between w-2/4 items-center text-white"> */}
 
@@ -99,6 +127,28 @@ const HospitalForm = () => {
                     type="text"
                     name="hospitalName"
                     placeholder="St Mary Clinical Care"
+                    className="border-slate-300 border-2 rounded-md my-2 w-full h-10 px-4"
+                    />
+                    <ErrorMessage name="hospitalName" component="div" className='text-slate-400 text-sm' />
+                </div>
+
+                <div id="name" className='my-8 items-baseline'>
+                    <h3 className="font-bold text-md">Hospital Description</h3>
+                    <Field
+                    type="text"
+                    name="hospitalDesc"
+                    placeholder="About the Hospital"
+                    className="border-slate-300 border-2 rounded-md my-2 w-full h-10 px-4"
+                    />
+                    <ErrorMessage name="hospitalName" component="div" className='text-slate-400 text-sm' />
+                </div>
+
+                <div id="name" className='my-8 items-baseline'>
+                    <h3 className="font-bold text-md">Hospital Moto</h3>
+                    <Field
+                    type="text"
+                    name="hospitalmot"
+                    placeholder="About the Hospital"
                     className="border-slate-300 border-2 rounded-md my-2 w-full h-10 px-4"
                     />
                     <ErrorMessage name="hospitalName" component="div" className='text-slate-400 text-sm' />
@@ -140,7 +190,7 @@ const HospitalForm = () => {
                     <ErrorMessage name="businessRegistration" component="div" className='text-slate-400 text-sm' />
                 </div>
 
-                
+{/*                 
                 <div id="week-days" className='my-8 items-baseline'>
                     <h3 className="font-bold text-md">Donation Availability</h3>
                     <div className='flex justify-between items-center '>
@@ -173,11 +223,11 @@ const HospitalForm = () => {
                     </select>
 
                     <img className='border-2 border-slate-400 rounded-full w-14 h-6'></img>
-                </div>
+                </div> */}
                 
-                <div className='flex justify-start items-center'>
+                {/* <div className='flex justify-start items-center'>
                     <img className='border-2 border-slate-400 rounded-full w-6 h-6 mr-2'></img><p>Add Availability</p>
-                </div>
+                </div> */}
 
                 <div id='phone' className='my-8 items-baseline'>
                     <h3 className="font-bold text-md">Contact Phone</h3>
