@@ -207,6 +207,15 @@
     "type": "function"
   },
   {
+    "inputs": [
+      { "internalType": "address", "name": "_admin", "type": "address" }
+    ],
+    "name": "fetchStatus",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [],
     "name": "getAllHospital",
     "outputs": [{ "internalType": "string[]", "name": "", "type": "string[]" }],
@@ -282,7 +291,10 @@
       { "internalType": "address", "name": "_admin", "type": "address" }
     ],
     "name": "showMyHospital",
-    "outputs": [{ "internalType": "string", "name": "uri", "type": "string" }],
+    "outputs": [
+      { "internalType": "string", "name": "uri", "type": "string" },
+      { "internalType": "string", "name": "_hospitalName", "type": "string" }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
